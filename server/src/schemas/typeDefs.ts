@@ -1,40 +1,37 @@
 
 
-// import { gql } from 'apollo-server-express';
-import gql from 'graphql-tag';
+import { gql } from 'apollo-server-express';
 
 export const typeDefs = gql`
   type Book {
     bookId: String!
-    title: String!
-    authors: [String]!
+    authors: [String!]!
     description: String!
-    image: String
+    title: String!
+    image: String!
     link: String!
   }
 
   type User {
-    _id: ID!
+    _id: String!
     username: String!
     email: String!
-    savedBooks: [Book]
+    savedBooks: [Book!]!
+  }
+
+  type Auth {
+    token: String!
+    user: User!
   }
 
   type Query {
     me: User
-    savedBooks: [Book]
-    searchBooks(query: String!): [Book]
   }
 
   type Mutation {
-    login(email: String!, password: String!): AuthPayload
-    signup(username: String!, email: String!, password: String!): AuthPayload
-    saveBook(bookId: String!): User
+    login(email: String!, password: String!): Auth
+    addUser(username: String!, email: String!, password: String!): Auth
+    saveBook(bookId: String!, title: String!, authors: [String!]!, description: String!, image: String!, link: String!): User
     removeBook(bookId: String!): User
-  }
-
-  type AuthPayload {
-    token: String!
-    user: User!
   }
 `;

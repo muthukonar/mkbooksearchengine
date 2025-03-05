@@ -1,19 +1,14 @@
-import dotenv from 'dotenv';
-dotenv.config();
-
 import mongoose from 'mongoose';
 
-const MONGODB_URI = process.env.MONGODB_URI || '';
+const db = {
+  uri: 'mongodb://127.0.0.1:27017/mkgooglebooks',
+  options: {
 
-const db = async (): Promise<typeof mongoose.connection> => {
-  try {
-    await mongoose.connect(MONGODB_URI);
-    console.log('Database connected.');
-    return mongoose.connection;
-  } catch (error) {
-    console.error('Database connection error:', error);
-    throw new Error('Database connection failed.');
   }
 };
 
-export default db;
+mongoose.connect(db.uri, db.options)
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((error) => console.error("Error connecting to MongoDB:", error));
+
+  export default db;

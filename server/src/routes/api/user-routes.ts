@@ -17,6 +17,7 @@ router.route('/').post(createUser).put(authenticateToken, saveBook);
 router.route('/login').post(login);
 
 router.route('/me').get(authenticateToken, getSingleUser);
+console.log('authenticatetoken', authenticateToken);
 
 router.route('/books/:bookId').delete(authenticateToken, deleteBook);
 

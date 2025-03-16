@@ -29,6 +29,7 @@ export const authenticateToken = (req: any, res: any, next: any) => {
   // Try to verify the token and attach user data to the request
   try {
     const { data }: any = jwt.verify(token, process.env.JWT_SECRET_KEY || '', { maxAge: '2h' });
+    console.log('Token verified');
 
     // Attach the user data from the token payload to the request object
     req.user = data;

@@ -73,5 +73,5 @@ const AppNavbar = () => {
     </>
   );
 };
-
+console.log(AppNavbar);
 export default AppNavbar;

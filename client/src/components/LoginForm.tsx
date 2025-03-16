@@ -178,5 +178,6 @@ const LoginForm = ({ handleModalClose }: { handleModalClose: () => void }) => {
     </>
   );
 };
+console.log(LoginForm);
 
 export default LoginForm;

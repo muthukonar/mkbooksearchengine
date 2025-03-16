@@ -3,9 +3,8 @@ import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 import path from 'path';
 import mongoose from 'mongoose';
-import { typeDefs } from './schemas/typeDefs';
-import { resolvers } from './schemas/resolvers';
-import db from './config/connection.js';
+import { typeDefs, resolvers } from './schemas/index.js';
+// import db from './config/connection.js';
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -38,7 +37,7 @@ const startApolloServer = async () => {
       res.sendFile(path.join(__dirname, '../client/dist/index.html'));
     });
   }
-  mongoose.connect(db.uri, db.options)
+  mongoose.connect(process.env.MONGODB_URI || '')
     .then(() => {
       console.log('Connected to MongoDB');
     })

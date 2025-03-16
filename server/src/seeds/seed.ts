@@ -1,16 +1,16 @@
 import db from '../config/connection.js';
-import  User  from '../models/User.js';  // Ensure correct import
+import  User  from '../models/User.js';  
 import cleanDB from './cleanDB.js';
 
-import userData from './userData.json' with { type: 'json' };  // Correct import of JSON
+import userData from './userData.json' with { type: 'json' };  
 
 const seedDatabase = async (): Promise<void> => {
   try {
     await db();
     await cleanDB();
 
-    // Seed the User collection
-    await User.create(userData);  // This should now work
+    
+    await User.create(userData);  
     console.log('Seeding completed successfully!');
     process.exit(0);
   } catch (error) {

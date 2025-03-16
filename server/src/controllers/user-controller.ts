@@ -38,6 +38,8 @@ export const login = async (req: Request, res: Response) => {
 
   const correctPw = await user.isCorrectPassword(req.body.password);
 
+  console.log('correctPw', correctPw);
+
   if (!correctPw) {
     return res.status(400).json({ message: 'Wrong password!' });
   }

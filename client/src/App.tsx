@@ -11,5 +11,5 @@ function App() {
     </>
   );
 }
-
+console.log('Landed on App.tsx');
 export default App;

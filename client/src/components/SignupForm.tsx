@@ -116,7 +116,7 @@
 import { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
-import { ADD_USER } from '../utils/mutations.js'; 
+import { CREATE_USER } from '../utils/mutations.js'; 
 import Auth from '../utils/auth';
 import type { User } from '../models/User';
 
@@ -129,7 +129,7 @@ const SignupForm = ({ handleModalClose }: { handleModalClose: () => void }) => {
   });
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
-  const [addUser] = useMutation(ADD_USER); 
+  const [addUser] = useMutation(CREATE_USER); 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value });
@@ -206,5 +206,5 @@ const SignupForm = ({ handleModalClose }: { handleModalClose: () => void }) => {
     </>
   );
 };
-
+console.log(SignupForm);
 export default SignupForm;

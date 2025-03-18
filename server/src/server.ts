@@ -2,9 +2,14 @@
 import express from 'express';
 import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
-import path from 'path';
+import path from 'node:path';
 import mongoose from 'mongoose';
 // import jwt from 'jsonwebtoken';
+import { fileURLToPath } from 'node:url';  // Import fileURLToPath
+import { dirname } from 'node:path';  // Import dirnam
+const __filename = fileURLToPath(import.meta.url);  // Get current file path
+const __dirname = dirname(__filename);  // Get current directory
+
 import { typeDefs, resolvers } from './schemas/index.js'; // Adjust if necessary
 import { authenticateToken } from './services/auth.js'; // Adjust path if necessary
 
@@ -27,7 +32,7 @@ const startApolloServer = async () => {
   // Set up GraphQL endpoint
   app.use('/graphql', expressMiddleware(server,  {context: authenticateToken} ));
 
-  // Serve static files for production
+  // // Serve static files for production
   if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/dist')));
 

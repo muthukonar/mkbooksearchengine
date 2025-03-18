@@ -1,10 +1,12 @@
 
+
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_ME } from '../utils/queries';  
 import { SAVE_BOOK, REMOVE_BOOK } from '../utils/mutations';  
 import { Container, Card, Button, Row, Col } from 'react-bootstrap';
 import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
+
 
 interface Book {
   bookId: string;
@@ -16,7 +18,7 @@ interface Book {
 }
 
 interface GetMeData {
-  getMe: {
+  me: {
     savedBooks: Book[];
   };
 }
@@ -24,7 +26,7 @@ interface GetMeData {
 const SavedBooks = () => {
   const { loading, error, data } = useQuery<GetMeData>(GET_ME); 
   const [removeBook] = useMutation(REMOVE_BOOK);
-  const [saveBook] = useMutation(SAVE_BOOK);  
+  const [saveBook] = useMutation(SAVE_BOOK);  // Add SAVE_BOOK mutation hook
 
   if (loading) return <h2>LOADING...</h2>;
   
@@ -53,6 +55,7 @@ const SavedBooks = () => {
   // Handle book save (new mutation)
   const handleSaveBook = async (book: Book) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
+    console.log(Auth.getToken());
 
     if (!token) {
       return;
@@ -85,12 +88,12 @@ const SavedBooks = () => {
       </div>
       <Container>
         <h2 className="pt-5">
-          {data?.getMe.savedBooks.length
-            ? `Viewing ${data.getMe.savedBooks.length} saved books:`
+          {data?.me.savedBooks.length
+            ? `Viewing ${data.me.savedBooks.length} saved books:`
             : 'You have no saved books!'}
         </h2>
         <Row>
-          {data?.getMe.savedBooks.map((book) => {
+          {data?.me.savedBooks.map((book) => {
             return (
               <Col md="4" key={book.bookId}>
                 <Card border="dark">
@@ -137,5 +140,5 @@ const SavedBooks = () => {
     </>
   );
 };
-
+console.log(SavedBooks);
 export default SavedBooks;

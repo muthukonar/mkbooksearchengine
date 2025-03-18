@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 // Middleware to authenticate the token from headers
-export const authenticateToken = (req: any, res: any, next: any) => {
+export const authenticateToken = ({req}: any) => {
   // Extract token from the authorization header, query string, or body
   let token = req.body.token || req.query.token || req.headers.authorization;
 
@@ -18,7 +18,7 @@ export const authenticateToken = (req: any, res: any, next: any) => {
 
   // If no token is provided, proceed without attaching user data
   if (!token) {
-    return next();
+    return req;
   }
 
   // Try to verify the token and attach user data to the request
@@ -28,10 +28,10 @@ export const authenticateToken = (req: any, res: any, next: any) => {
 
     // Attach the user data from the token payload to the request object
     req.user = data;
-    return next();
+    return req;
   } catch (err) {
     console.log('Invalid token');
-    return res.sendStatus(403); // Forbidden if token is invalid
+    // return res.sendStatus(403); // Forbidden if token is invalid
   }
 };
 

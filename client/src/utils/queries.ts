@@ -3,7 +3,7 @@ import { gql } from '@apollo/client';
 
 // Query to get the logged-in user's info
 export const GET_ME = gql`
-  query getMe {
+  query getMe  {
     me {
       _id
       username

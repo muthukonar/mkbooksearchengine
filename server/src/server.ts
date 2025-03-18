@@ -34,16 +34,16 @@ const startApolloServer = async () => {
 
   // // Serve static files for production
   if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../client/dist')));
+    app.use(express.static(path.join(__dirname, '../../client/dist')));
 
     // Handle routing for client-side routes
     app.get('*', (_req, res) => {
-      res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+      res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
     });
   }
 
-  // Connect to MongoDB
-  mongoose.connect(process.env.MONGODB_URI || '')
+  // // Connect to MongoDB
+  mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/mkgooglebooks')
     .then(() => {
       console.log('Connected to MongoDB');
     })

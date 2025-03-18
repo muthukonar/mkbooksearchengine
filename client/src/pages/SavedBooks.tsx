@@ -1,8 +1,8 @@
 
 
 import { useQuery, useMutation } from '@apollo/client';
-import { GET_ME } from '../utils/queries';  
-import { SAVE_BOOK, REMOVE_BOOK } from '../utils/mutations';  
+import { GET_ME } from '../utils/queries';
+import { SAVE_BOOK, REMOVE_BOOK } from '../utils/mutations';
 import { Container, Card, Button, Row, Col } from 'react-bootstrap';
 import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
@@ -24,12 +24,12 @@ interface GetMeData {
 }
 
 const SavedBooks = () => {
-  const { loading, error, data } = useQuery<GetMeData>(GET_ME); 
+  const { loading, error, data } = useQuery<GetMeData>(GET_ME);
   const [removeBook] = useMutation(REMOVE_BOOK);
   const [saveBook] = useMutation(SAVE_BOOK);  // Add SAVE_BOOK mutation hook
 
   if (loading) return <h2>LOADING...</h2>;
-  
+
   if (error) return <h2>Error loading saved books!</h2>;
 
   // Handle book removal
@@ -46,7 +46,7 @@ const SavedBooks = () => {
       });
 
       console.log('Book removed', data);
-      removeBookId(bookId);  
+      removeBookId(bookId);
     } catch (err) {
       console.error('Error removing book:', err);
     }
@@ -127,10 +127,10 @@ const SavedBooks = () => {
         <h2>Save a new book!</h2>
         {/* Replace this with actual book data to pass into handleSaveBook */}
         <Button onClick={() => handleSaveBook({
-          bookId: "1234", 
-          title: "Sample Book", 
-          authors: ["Author One"], 
-          description: "This is a sample book description", 
+          bookId: "1234",
+          title: "Sample Book",
+          authors: ["Author One"],
+          description: "This is a sample book description",
           image: "image_url_here",
           link: "https://link_to_book.com"
         })}>

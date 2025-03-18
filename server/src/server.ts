@@ -30,7 +30,7 @@ const startApolloServer = async () => {
   app.use(express.json());
 
   // Set up GraphQL endpoint
-  app.use('/graphql', expressMiddleware(server,  {context: authenticateToken} ));
+  app.use('/graphql', expressMiddleware(server, { context: authenticateToken }));
 
   // // Serve static files for production
   if (process.env.NODE_ENV === 'production') {

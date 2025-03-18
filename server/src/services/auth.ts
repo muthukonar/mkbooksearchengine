@@ -5,11 +5,11 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 // Middleware to authenticate the token from headers
-export const authenticateToken = ({req}: any) => {
+export const authenticateToken = ({ req }: any) => {
   // Extract token from the authorization header, query string, or body
   let token = req.body.token || req.query.token || req.headers.authorization;
 
-  
+
 
   // If the token is provided in the authorization header, split and get the actual token
   if (req.headers.authorization) {
